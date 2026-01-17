@@ -6441,3 +6441,89 @@ img:hover {
 #team .team-more-btn[aria-expanded="true"] .arrow{
   transform: rotate(180deg);
 }
+/* ===============================
+   EQUIPMENT / VESSEL GALLERY GRID (LIKE YOUR IMAGE)
+   =============================== */
+
+.equip-gallery{
+  /* 2-column layout like the screenshot */
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px;
+  padding: 18px 0 6px;
+
+  /* centered block */
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Card frame */
+.equip-photo{
+  margin: 0;
+  border-radius: 18px;
+  border: 10px solid #0b0b0b;        /* black frame */
+  background: #fff;                   /* IMPORTANT: no black background inside */
+  overflow: hidden;
+
+  /* equal height cards like screenshot */
+  aspect-ratio: 16 / 9;
+
+  /* polish */
+  box-shadow: 0 16px 30px rgba(0,0,0,.12);
+  position: relative;
+}
+
+/* make the image FIT the frame (no black bars) */
+.equip-photo img{
+  width: 100%;
+  height: 100%;
+  display: block;
+
+  /* fill the card */
+  object-fit: cover;                  /* removes black/empty areas */
+  object-position: center;
+}
+
+/* optional subtle inner edge */
+.equip-photo::after{
+  content:"";
+  position:absolute;
+  inset: 0;
+  pointer-events:none;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.10);
+}
+
+/* If any captions still exist, hide them (your screenshot has none) */
+.equip-photo .cap,
+.equip-photo figcaption{
+  display: none !important;
+}
+
+/* ===============================
+   RESPONSIVE
+   =============================== */
+
+/* tablets: keep 2 columns, just tighter */
+@media (max-width: 912px){
+  .equip-gallery{
+    gap: 18px;
+  }
+  .equip-photo{
+    border-width: 8px;
+    border-radius: 16px;
+  }
+}
+
+/* phones: stack 1 column (still same framed look) */
+@media (max-width: 600px){
+  .equip-gallery{
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding: 14px 0 2px;
+  }
+  .equip-photo{
+    border-width: 7px;
+    border-radius: 16px;
+    aspect-ratio: 16 / 10; /* a bit taller on mobile */
+  }
+}
